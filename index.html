@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subnetting</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+            width: 40px;
+        }
+
+        .octet b {
+            font-size: 40;
+        }
+
+        input {
+            border: solid 2px rgb(121, 121, 121);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .netmask-container {
+            margin-left: 7px;
+        }
+
+        small {
+            font-size: 13px !important;
+        }
+
+        #networks,
+        #hosts {
+            width: 120px !important;
+            text-align: left;
+        }
+
+        .controls {
+            width: 250px;
+            margin-right: 10px;
+        }
+
+        .answer-container {
+            width: 510px;
+            height: 500px;
+            max-width: 500px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="m-2">Subnetting</h1>
+    <div class="d-md-flex ms-2">
+        <form action="" class="">
+            <div class="d-flex">
+                <div>
+                    <label>IP Address</label><br>
+                    <input class="ip" type="number" name="octet-1" oninput="checkIpInput(this)">
+                    <span class="octet"><b>.</b></span>
+                    <input class="ip" type="number" name="octet-2" oninput="checkIpInput(this)">
+                    <span class="octet"><b>.</b></span>
+                    <input class="ip" type="number" name="octet-3" oninput="checkIpInput(this)">
+                    <span class="octet"><b>.</b></span>
+                    <input class="ip" type="number" name="octet-4" oninput="checkIpInput(this)">
+                </div>
+                <div class="netmask-container">
+                    <label for="">&nbsp&nbspNetMask</label><br>
+                    <span class="octet"><b>/</b></span>
+                    <input id="netmask" type="number" name="netmask"><br>
+                </div>
+                <div class="ms-4">
+                    <label for="">Number of Networks</label> <br>
+                    <input id="networks" type="number" name="non"><br>
+                </div>
+            </div>
+
+
+            <h2 class="mt-4">Controls</h2>
+            <div class="d-flex">
+                <div class="controls border border-2 rounded-3 p-3">
+                    <button type="button" id="start-calculation" class="btn btn-primary">Start Calculating</button>
+                    <br>
+                    <small>Will start the computation process, ALL INPUTS MUST HAVE A VALUE</small>
+                    <br><br>
+                    <small>OPTIONAL: you can add a value on "Number of Host" to overwrite the given netmask and find a
+                        more suitable netmask for the required number of hosts</small>
+                </div>
+                <div class="controls border border-2 rounded-3 p-3">
+                    <label for="">Number of Host</label><br>
+                    <input id="hosts" type="number" name="host" class="mb-1"><br>
+                    <button type="button" id="find-netmask" class="btn btn-primary">Find Netmask</button>
+                    <br>
+                    <small>Finds the suitable netmask for the given Number of Needed Hosts.</small>
+                </div>
+            </div>
+        </form>
+
+        <div class="answer">
+            <h3>Answers</h3>
+            <div class="border border-secondary answer-container">
+                <p class="ms-2" id="answers"></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    function checkIpInput(input) {
+        const value = input.value;
+        const name = input.name.split("-");
+        const nextOctet = Number(name[1]) + 1;
+        if (nextOctet != 5) {
+            if (value.length == 3) {
+                document.getElementsByName(`${name[0]}-${nextOctet}`)[0].focus();
+            }
+        }
+
+        if (value.length > 3) {
+            const prevValue = value.substring(0, 3);
+            input.value = prevValue;
+        }
+    }
+</script>
+
+<script src="index.js"></script>
+
+</html>
