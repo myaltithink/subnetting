@@ -116,6 +116,10 @@ function checkIp() {
             let prevOctet = i - 1;
             ip[i] = 0;
             ip[prevOctet]++;
+            if(ip[prevOctet] == 256){
+                ip[prevOctet] = 0;
+                ip[prevOctet - 1]++;
+            }
         }
     }
 }
