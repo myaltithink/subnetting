@@ -112,7 +112,7 @@ function getNetworkMinMax() {
 
 function checkIp() {
     for (let i = 0; i < ip.length; i++) {
-        if (ip[i] >= 256) {
+        if (ip[i] >= 255) {
             let prevOctet = i - 1;
             ip[i] = 0;
             ip[prevOctet]++;
