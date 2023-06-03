@@ -110,6 +110,9 @@ window.addEventListener("load", () => {
         netMask = netmask.value;
         numberOfNetworks = non.value
 
+        remainingBits = 0;
+        computedRemainingBits = 0;
+
         if (!empty.test(host.value)) {
             findClassBitBasedOnHost(host.value);
         }
@@ -230,6 +233,7 @@ function findClassBit() {
     let totalCount = 0;
     let currentBitIndex = 0;
     let currentBit = 0;
+    remainingBits = 0;
 
     //get subnet octets bits.
     for (let i = 1; i <= 32; i++) {
