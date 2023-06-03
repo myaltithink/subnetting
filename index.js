@@ -17,34 +17,93 @@ let ip = [0, 0, 0, 0];
 let answersContainer = null;
 let answer = "";
 
+let vlsm = [];
+let calculatingVlsm = false;
+
+const empty = /^\s*$/;
 
 window.addEventListener("load", () => {
     answersContainer = document.getElementById("answers")
+
+    document.getElementById("compute-vlsm").addEventListener("click", () => {
+        const octets = document.getElementsByClassName("ip");
+        const vslmInput = document.getElementById("vlsm-hosts");
+
+        const missingip = checkIPInput(octets);
+
+        if (missingip || empty.test(vslmInput.value)) {
+            displayMissingInput();
+            return;
+        }
+
+        let vlsmValues = vslmInput.value.split(" ");
+        calculatingVlsm = true;
+
+        for (const data of vlsmValues) {
+
+            let requiredhosts = 0;
+            let netmask = 0;
+            let netmaskhosts = 0;
+
+            remainingBits = 0;
+            computedRemainingBits = 0;
+            if (data.includes("/")) {
+                netMask = Number(data.split("/")[1])
+                findClassBit();
+                requiredhosts = computedRemainingBits;
+                netmask = netMask;
+                netmaskhosts = computedRemainingBits;
+            } else {
+                findClassBitBasedOnHost(Number(data))
+                requiredhosts = Number(data);
+                netmask = netMask;
+                netmaskhosts = computedRemainingBits;
+            }
+
+            vlsm.push({
+                network: data,
+                requiredHosts: requiredhosts,
+                netMaskHosts: netmaskhosts,
+                netMask: netmask
+            });
+        }
+        
+        bitCounts = [0, 0, 0, 0];
+
+        vlsm.sort((a, b) => {
+            return b.requiredHosts - a.requiredHosts
+        });
+        console.log(vlsm)
+        answer = answer + "Sorted VLSM:";
+        vlsm.forEach(data => {
+            answer = answer + `\nNet: ${data.network} = {Hosts: ${data.requiredHosts} || NetMask: ${data.netMask} || NetMask Hosts: ${data.netMaskHosts}}`;
+        });
+        answer = answer + "\n";
+        let index = 0;
+        for (const networkData of vlsm) {
+            netMask = networkData.netMask;
+            findClassBit();
+            getSubnetMask();
+            answer = answer + `\nNetwork ${index + 1} - ${networkData.network} || NetMask: ${networkData.netMask}`;
+            getNetworkMinMax(networkData.netMaskHosts, index);
+            index++;
+        }
+
+        answersContainer.innerText = answer;
+
+        clear();
+    });
+
     document.getElementById("start-calculation").addEventListener("click", () => {
         const octets = document.getElementsByClassName("ip");
         const netmask = document.getElementById("netmask");
         const non = document.getElementById("networks");
         const host = document.getElementById("hosts");
-        const empty = /^\s*$/;
 
-        let missingip = false;
-
-        for (const octet of octets) {
-            let name = octet.name.split("-");
-            let index = Number(name[1]) - 1;
-
-            if (empty.test(octet.value)) {
-                missingip = true;
-                break;
-            }
-
-            ip[index] = Number(octet.value);
-        }
+        const missingip = checkIPInput(octets);
 
         if (empty.test(netmask.value) || empty.test(non.value) || missingip) {
-            answer = "Missing field has been detected"
-            answersContainer.innerText = answer;
-            clear()
+            displayMissingInput();
             return;
         }
 
@@ -56,7 +115,9 @@ window.addEventListener("load", () => {
         }
         findClassBit();
         getSubnetMask();
-        getNetworkMinMax();
+        for (let i = 0; i < numberOfNetworks; i++) {
+            getNetworkMinMax(computedRemainingBits, i);
+        }
         answersContainer.innerText = answer;
         clear();
     });
@@ -71,6 +132,45 @@ window.addEventListener("load", () => {
     });
 })
 
+function getNetworkMinMax(hostIteration, sub) {
+    let networks = hostIteration;
+    answer = answer + `\nSub ${sub}: ${displayIp()} - ${subnetMask}\n`
+    incrementIp();
+    networks--;
+
+    answer = answer + `1st: ${displayIp()}\n`;
+    for (let j = 0; j < networks - 2; j++) {
+        incrementIp();
+    }
+    networks -= ip[3];
+
+    answer = answer + `last: ${displayIp()}\n`;
+
+    incrementIp();
+    networks = computedRemainingBits;
+    answer = answer + `broadcast: ${displayIp()}\n`;
+    incrementIp();
+}
+
+function displayMissingInput() {
+    answer = "Missing field has been detected"
+    answersContainer.innerText = answer;
+    clear()
+}
+
+function checkIPInput(octets) {
+    for (const octet of octets) {
+        let name = octet.name.split("-");
+        let index = Number(name[1]) - 1;
+        if (empty.test(octet.value)) {
+            return true;
+        }
+
+        ip[index] = Number(octet.value);
+    }
+    return false;
+}
+
 function clear() {
     usableHosts = "";
     subnetMask = "0.0.0.0";
@@ -82,32 +182,12 @@ function clear() {
     numberOfNetworks = 0;
     ip = [0, 0, 0, 0];
     answer = "";
+    vlsm = [];
 }
 
-function getNetworkMinMax() {
-    let networks = computedRemainingBits;
-    for (let i = 0; i < numberOfNetworks; i++) {
-        answer = answer + `\nSub ${i}: ${displayIp()}\n`;
-        ip[3]++;
-        networks--;
-        checkIp();
-
-        answer = answer + `1st: ${displayIp()}\n`;
-        for (let j = 0; j < networks - 2; j++) {
-            ip[3]++;
-            checkIp();
-        }
-        networks -= ip[3];
-
-        answer = answer + `last: ${displayIp()}\n`;
-
-        ip[3]++;
-        checkIp()
-        networks = computedRemainingBits;
-        answer = answer + `broadcast: ${displayIp()}\n`;
-        ip[3]++;
-        checkIp();
-    }
+function incrementIp() {
+    ip[3]++;
+    checkIp();
 }
 
 function checkIp() {
@@ -116,7 +196,7 @@ function checkIp() {
             let prevOctet = i - 1;
             ip[i] = 0;
             ip[prevOctet]++;
-            if(ip[prevOctet] == 256){
+            if (ip[prevOctet] == 256) {
                 ip[prevOctet] = 0;
                 ip[prevOctet - 1]++;
             }
@@ -130,21 +210,20 @@ function displayIp() {
 
 function findClassBitBasedOnHost(host) {
     netMask = 32;
-    findClassBit(netMask);
+    findClassBit();
     while (computedRemainingBits < host) {
         console.log("bits: " + netMask + " | hosts: " + computedRemainingBits + " | usable hosts: " + (computedRemainingBits - 2));
         console.log()
         netMask--;
         remainingBits = 0;
-        findClassBit(netMask);
+        findClassBit();
     }
-    answer = `Suitable Bits for ${host} hosts is ` + netMask + " bits";
-    usableHosts = `Hosts: ${computedRemainingBits} - 2 = ${computedRemainingBits - 2} usable hosts`;
-    answer = answer + "\n" + usableHosts;
-    console.log(netMask)
-    remainingBits = 0;
-    computedRemainingBits = 0;
-
+    console.log(`Suitable Bits for ${host} hosts is ${netMask} bits`);
+    if (!calculatingVlsm) {
+        answer = `Suitable Bits for ${host} hosts is ${netMask} bits`;
+        usableHosts = `Hosts: ${computedRemainingBits} - 2 = ${computedRemainingBits - 2} usable hosts`;
+        answer = answer + "\n" + usableHosts;
+    }
 }
 
 function findClassBit() {
@@ -181,6 +260,7 @@ function findClassBit() {
 function getSubnetMask() {
     //get subnet mask values
     let subnetValues = [0, 0, 0, 0];
+
     for (let i = 0; i < bitCounts.length; i++) {
         switch (bitCounts[i]) {
             case 8:
@@ -198,10 +278,14 @@ function getSubnetMask() {
                 break;
         }
     }
-    answer = answer + "\nbits: " + bitCounts + "\n";
-    answer = answer + "remaining: " + remainingBits + "\n";
+    
     subnetMask = `${subnetValues[0]}.${subnetValues[1]}.${subnetValues[2]}.${subnetValues[3]}`;
-    usableHosts = `${computedRemainingBits} - 2 = ${computedRemainingBits - 2} usable hosts`;
-    answer = answer + "Subnet Mask: " + subnetMask + "\n";
-    answer = answer + "Hosts: " + usableHosts + "\n";
+        
+    if (!calculatingVlsm) {
+        answer = answer + "Bits: " + bitCounts + "\n";
+        answer = answer + "remaining: " + remainingBits + "\n";
+        usableHosts = `${computedRemainingBits} - 2 = ${computedRemainingBits - 2} usable hosts`;
+        answer = answer + "Subnet Mask: " + subnetMask + "\n";
+        answer = answer + "Hosts: " + usableHosts + "\n";
+    }
 }
