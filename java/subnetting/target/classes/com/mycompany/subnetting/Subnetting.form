@@ -35,19 +35,19 @@
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="octect1" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="octet1" min="-2" pref="35" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="octect2" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="octet2" min="-2" pref="35" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="octect3" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="octet3" min="-2" pref="35" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="octect4" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="octet4" min="-2" pref="35" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -101,13 +101,13 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="octect1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="octet1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="octect4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="octet4" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="octect2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="octect3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="octet2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="octet3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="netmaskField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -143,10 +143,7 @@
         <Property name="text" type="java.lang.String" value="Netmask"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="octect1">
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="octect1KeyPressed"/>
-      </Events>
+    <Component class="javax.swing.JTextField" name="octet1">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -164,7 +161,7 @@
         <Property name="text" type="java.lang.String" value="."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="octect2">
+    <Component class="javax.swing.JTextField" name="octet2">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -174,9 +171,9 @@
         <Property name="text" type="java.lang.String" value="."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="octect3">
+    <Component class="javax.swing.JTextField" name="octet3">
     </Component>
-    <Component class="javax.swing.JTextField" name="octect4">
+    <Component class="javax.swing.JTextField" name="octet4">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -409,6 +406,7 @@
     <Component class="java.awt.TextArea" name="answerContainer">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Bits: 8,7,0,0&#xa;remaining: 17&#xa;Subnet Mask: 255.254.0.0&#xa;Hosts: 131072 - 2 = 131070 usable hosts&#xa;&#xa;Sub 0: 140.40.0.0 - 255.254.0.0&#xa;1st: 140.40.0.1&#xa;last: 140.41.255.254&#xa;broadcast: 140.41.255.255&#xa;&#xa;Sub 1: 140.42.0.0 - 255.254.0.0&#xa;1st: 140.42.0.1&#xa;last: 140.43.255.254&#xa;broadcast: 140.43.255.255&#xa;&#xa;Sub 2: 140.44.0.0 - 255.254.0.0&#xa;1st: 140.44.0.1&#xa;last: 140.45.255.254&#xa;broadcast: 140.45.255.255&#xa;&#xa;Sub 3: 140.46.0.0 - 255.254.0.0&#xa;1st: 140.46.0.1&#xa;last: 140.47.255.254&#xa;broadcast: 140.47.255.255&#xa;&#xa;Sub 4: 140.48.0.0 - 255.254.0.0&#xa;1st: 140.48.0.1&#xa;last: 140.49.255.254&#xa;broadcast: 140.49.255.255&#xa;&#xa;Sub 5: 140.50.0.0 - 255.254.0.0&#xa;1st: 140.50.0.1&#xa;last: 140.51.255.254&#xa;broadcast: 140.51.255.255&#xa;&#xa;Sub 6: 140.52.0.0 - 255.254.0.0&#xa;1st: 140.52.0.1&#xa;last: 140.53.255.254&#xa;broadcast: 140.53.255.255&#xa;&#xa;Sub 7: 140.54.0.0 - 255.254.0.0&#xa;1st: 140.54.0.1&#xa;last: 140.55.255.254&#xa;broadcast: 140.55.255.255&#xa;&lt;/html&gt;"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new java.awt.TextArea(&quot;&quot;, 0, 0, java.awt.TextArea.SCROLLBARS_VERTICAL_ONLY)"/>

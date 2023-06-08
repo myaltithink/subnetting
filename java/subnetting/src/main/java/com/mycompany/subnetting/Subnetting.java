@@ -20,13 +20,13 @@ public class Subnetting extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        octet1 = new javax.swing.JTextField();
+        octect1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        octet2 = new javax.swing.JTextField();
+        octect2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        octet3 = new javax.swing.JTextField();
-        octet4 = new javax.swing.JTextField();
+        octect3 = new javax.swing.JTextField();
+        octect4 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         netmaskField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -55,6 +55,12 @@ public class Subnetting extends javax.swing.JFrame {
         jLabel1.setText("Subnetting");
 
         jLabel2.setText("Netmask");
+
+        octect1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                octect1KeyPressed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText(".");
@@ -201,7 +207,6 @@ public class Subnetting extends javax.swing.JFrame {
         );
 
         answerContainer.setEditable(false);
-        answerContainer.setText("<html>\nBits: 8,7,0,0\nremaining: 17\nSubnet Mask: 255.254.0.0\nHosts: 131072 - 2 = 131070 usable hosts\n\nSub 0: 140.40.0.0 - 255.254.0.0\n1st: 140.40.0.1\nlast: 140.41.255.254\nbroadcast: 140.41.255.255\n\nSub 1: 140.42.0.0 - 255.254.0.0\n1st: 140.42.0.1\nlast: 140.43.255.254\nbroadcast: 140.43.255.255\n\nSub 2: 140.44.0.0 - 255.254.0.0\n1st: 140.44.0.1\nlast: 140.45.255.254\nbroadcast: 140.45.255.255\n\nSub 3: 140.46.0.0 - 255.254.0.0\n1st: 140.46.0.1\nlast: 140.47.255.254\nbroadcast: 140.47.255.255\n\nSub 4: 140.48.0.0 - 255.254.0.0\n1st: 140.48.0.1\nlast: 140.49.255.254\nbroadcast: 140.49.255.255\n\nSub 5: 140.50.0.0 - 255.254.0.0\n1st: 140.50.0.1\nlast: 140.51.255.254\nbroadcast: 140.51.255.255\n\nSub 6: 140.52.0.0 - 255.254.0.0\n1st: 140.52.0.1\nlast: 140.53.255.254\nbroadcast: 140.53.255.255\n\nSub 7: 140.54.0.0 - 255.254.0.0\n1st: 140.54.0.1\nlast: 140.55.255.254\nbroadcast: 140.55.255.255\n</html>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -218,19 +223,19 @@ public class Subnetting extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel9)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(octet1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(octect1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(octet2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(octect2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(octet3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(octect3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(octet4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(octect4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel6)))
                                 .addGap(6, 6, 6)
@@ -270,13 +275,13 @@ public class Subnetting extends javax.swing.JFrame {
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(octet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(octect1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
-                            .addComponent(octet4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(octect4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(octet2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(octet3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(octect2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(octect3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
                             .addComponent(netmaskField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -297,6 +302,7 @@ public class Subnetting extends javax.swing.JFrame {
 
     private void calculateIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateIPActionPerformed
         System.out.println("calculate ip triggered with event " + evt.getActionCommand());
+        octect1.requestFocus();
     }//GEN-LAST:event_calculateIPActionPerformed
 
     private void findNetMaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findNetMaskActionPerformed
@@ -308,6 +314,10 @@ public class Subnetting extends javax.swing.JFrame {
                                    
         System.out.println("compute vlsm triggered with event " + evt.getActionCommand());
     }//GEN-LAST:event_computeVLSMActionPerformed
+
+    private void octect1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_octect1KeyPressed
+        System.out.println(evt.getID());
+    }//GEN-LAST:event_octect1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -369,10 +379,10 @@ public class Subnetting extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField netmaskField;
-    private javax.swing.JTextField octet1;
-    private javax.swing.JTextField octet2;
-    private javax.swing.JTextField octet3;
-    private javax.swing.JTextField octet4;
+    private javax.swing.JTextField octect1;
+    private javax.swing.JTextField octect2;
+    private javax.swing.JTextField octect3;
+    private javax.swing.JTextField octect4;
     private javax.swing.JTextField vlsmHosts;
     private javax.swing.JPanel vlsmPanel;
     // End of variables declaration//GEN-END:variables
