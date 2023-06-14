@@ -4,6 +4,10 @@
  */
 package com.mycompany.subnetting;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.regex.Pattern;
+
 /**
  *
  * @author SHarp
@@ -21,24 +25,24 @@ public class Subnetting extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         octect1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         octect2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         octect3 = new javax.swing.JTextField();
         octect4 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         netmaskField = new javax.swing.JTextField();
+        nonField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         calculateIPPanel = new javax.swing.JPanel();
         calculateIP = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         findNetMaskPanel = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        requiredHosts = new javax.swing.JTextField();
         findNetMask = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         vlsmPanel = new javax.swing.JPanel();
@@ -49,18 +53,13 @@ public class Subnetting extends javax.swing.JFrame {
         answerContainer = new java.awt.TextArea("", 0, 0, java.awt.TextArea.SCROLLBARS_VERTICAL_ONLY);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Subnetting");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Subnetting");
 
         jLabel2.setText("Netmask");
-
-        octect1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                octect1KeyPressed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText(".");
@@ -142,7 +141,7 @@ public class Subnetting extends javax.swing.JFrame {
                     .addGroup(findNetMaskPanelLayout.createSequentialGroup()
                         .addGroup(findNetMaskPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(requiredHosts, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(findNetMask, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 37, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -153,7 +152,7 @@ public class Subnetting extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(requiredHosts, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(findNetMask, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -207,6 +206,7 @@ public class Subnetting extends javax.swing.JFrame {
         );
 
         answerContainer.setEditable(false);
+        answerContainer.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,7 +242,7 @@ public class Subnetting extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(netmaskField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2)))
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(nonField, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(calculateIPPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,7 +287,7 @@ public class Subnetting extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nonField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(findNetMaskPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -300,28 +300,275 @@ public class Subnetting extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private final int[] bitValues = {128, 64, 32, 16, 8, 4, 2, 1};
+    
+    private int[] ip = {0, 0, 0, 0};
+    private int[] netMaskBitCount = {0, 0, 0, 0};
+    private int netmask = 0;
+    private int numberOfNetworks = 0;
+    private int remainingNetMaskBit = 0;
+    private int netMaskHostCapacity = 0;
+    private String subnetMask = "";
+    
+    private boolean calculatingVlsm = false;
+    
+    private String line = "";
+    private StringBuilder answerBuilder = new StringBuilder();
+    
+    private Pattern emptyPattern = Pattern.compile("^\\s*$");
+    
     private void calculateIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateIPActionPerformed
         System.out.println("calculate ip triggered with event " + evt.getActionCommand());
-        octect1.requestFocus();
+        ip[0] = Integer.parseInt(octect1.getText());
+        ip[1] = Integer.parseInt(octect2.getText());
+        ip[2] = Integer.parseInt(octect3.getText());
+        ip[3] = Integer.parseInt(octect4.getText());
+        
+        calculatingVlsm = false;
+        
+        netmask = Integer.parseInt(netmaskField.getText());
+        numberOfNetworks = Integer.parseInt(nonField.getText());
+        
+        if (!emptyPattern.matcher(requiredHosts.getText()).find()){
+            findNetMaskBasedOnHost(Integer.parseInt(requiredHosts.getText()));
+        }
+        findNetMask();
+        getSubnetMask();
+        for (int i = 0; i < numberOfNetworks; i++) {
+            getNetworkMinMax(netMaskHostCapacity, i);
+        }
+        displayAnswer();
+        clear();
+        
     }//GEN-LAST:event_calculateIPActionPerformed
 
     private void findNetMaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findNetMaskActionPerformed
-                                   
-        System.out.println("find netmask triggered with event " + evt.getActionCommand());
+        findNetMaskBasedOnHost(Integer.parseInt(requiredHosts.getText()));
+        netmaskField.setText(netmask + "");
+        getSubnetMask();
+        displayAnswer();
     }//GEN-LAST:event_findNetMaskActionPerformed
 
     private void computeVLSMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_computeVLSMActionPerformed
-                                   
-        System.out.println("compute vlsm triggered with event " + evt.getActionCommand());
+        ip[0] = Integer.parseInt(octect1.getText());
+        ip[1] = Integer.parseInt(octect2.getText());
+        ip[2] = Integer.parseInt(octect3.getText());
+        ip[3] = Integer.parseInt(octect4.getText());
+        
+        calculatingVlsm = true;
+        
+        String[] vlsms = vlsmHosts.getText().split(" ");
+        ArrayList<vlsm> vlsmData = new ArrayList<>();
+        
+        for (String data : vlsms){
+            
+            int requiredhost = 0;
+            int vlsmNetmask = 0;
+            int netmaskhost = 0;
+            
+            netMaskHostCapacity = 0;
+            remainingNetMaskBit = 0;
+            
+            if (data.contains("/")) {
+                netmask = Integer.parseInt(data.split("/")[1]);
+                findNetMask();
+                requiredhost = netMaskHostCapacity;
+                vlsmNetmask = netmask;
+                netmaskhost = netMaskHostCapacity;
+            }else {
+                findNetMaskBasedOnHost(Integer.parseInt(data));
+                requiredhost = Integer.parseInt(data);
+                vlsmNetmask = netmask;
+                netmaskhost = netMaskHostCapacity;
+            }
+            
+            vlsmData.add(new vlsm(data, requiredhost, netmaskhost, netmask));
+            
+        }
+        netMaskBitCount = new int[]{0, 0, 0, 0};
+            
+        vlsmData.sort((o1, o2) -> {
+            return o2.getRequiredHosts() - o1.getRequiredHosts();
+        });
+            
+        line = "Sorted VLSM: \n";
+        append();
+        vlsmData.forEach((data) -> {
+            line = "Net: " + data.getNetwork() + " {Hosts: " + data.getRequiredHosts() + " || NetMask: " + data.getNetMask() + " || NetMask Hosts: " + data.getNetMaskHosts() + "}\n\n";
+            append();
+        });
+        
+        for (int i = 0; i < vlsmData.size(); i++) {
+            vlsm data = vlsmData.get(i);
+            netmask = data.getNetMask();
+            findNetMask();
+            getSubnetMask();
+            line = "\nNetwork " + (i + 1) + " - " + data.getNetwork() + " || NetMask: " + data.getNetMask();
+            append();
+            getNetworkMinMax(data.getNetMaskHosts(), i);
+        }
+        
+        displayAnswer();
+        clear();
     }//GEN-LAST:event_computeVLSMActionPerformed
 
-    private void octect1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_octect1KeyPressed
-        System.out.println(evt.getID());
-    }//GEN-LAST:event_octect1KeyPressed
-
-    /**
-     * @param args the command line arguments
-     */
+    private void clear(){
+        ip = new int[]{0,0,0,0};
+        netMaskBitCount = new int[]{0, 0, 0, 0};
+        netmask = 0;
+        numberOfNetworks = 0;
+        remainingNetMaskBit = 0;
+        netMaskHostCapacity = 0;
+        subnetMask = "";
+        answerBuilder.setLength(0);
+    }
+    
+    private void getNetworkMinMax(int hostIteration, int sub){
+        int networks = hostIteration;
+        line = "\nSub " + sub + ": " + displayIP() + " - " + subnetMask + "\n";
+        append();
+        incrementIp();
+        networks--;
+        
+        line = "1st: " + displayIP() + "\n";
+        append();
+        int numberOfIncrements = 0;
+        
+        for (int i = 0; i < networks - 2; i++) {
+            incrementIp();
+            numberOfIncrements++;
+        }
+        networks = networks - numberOfIncrements;
+                
+        line = "last: " + displayIP() + "\n";
+        append();
+        
+        incrementIp();
+        networks = netMaskHostCapacity;
+        line = "broadcast: " + displayIP() + "\n";
+        append();
+        incrementIp();
+    }
+    
+    private void append(){
+        answerBuilder.append(line);
+    }
+    
+    private void displayAnswer(){
+        answerContainer.setText(answerBuilder.toString());
+    }
+    
+    private void incrementIp(){
+        ip[3]++;
+        checkIp();
+    }
+    
+    private String displayIP(){
+        return ip[0] + "." + ip[1] + "." + ip[2] + "." + ip[3];
+    }
+    
+    private void checkIp(){
+        for (int i = 0; i < ip.length; i++) {
+            if (ip[i] == 256) {
+                int prevOctect = i - 1;
+                ip[i] = 0;
+                ip[prevOctect]++;
+                if (ip[prevOctect] == 256) {
+                    ip[prevOctect] = 0;
+                    ip[prevOctect - 1]++;
+                }
+            }
+        }
+    }
+    
+    private void findNetMaskBasedOnHost(int host){
+        netmask = 32;
+        findNetMask();
+        while (netMaskHostCapacity < host) {            
+            System.out.println("bits: " + netmask + " | hosts: " + netMaskHostCapacity + " | usable hosts: " + (netMaskHostCapacity - 2));
+            System.out.println("");
+            netmask--;
+            remainingNetMaskBit = 0;
+            findNetMask();
+        }
+        String suitableNetmask = "Suitable Netmask for " + host + " hosts is " + netmask + "\n\n";
+        System.out.println(suitableNetmask);
+        
+        if (!calculatingVlsm) {
+            line = suitableNetmask + "\n"
+                    + "Hosts: " + netMaskHostCapacity + " - 2 = " + (netMaskHostCapacity - 2) + " usable hosts\n";
+            append();
+        }
+    }
+    
+    private void findNetMask(){
+        int totalCount = 0;
+        int currentBitIndex = 0;
+        int currentBitCount = 0;
+        remainingNetMaskBit = 0;
+        
+        for (int i = 1; i <= 32; i++) {
+            
+            if (totalCount == netmask) {
+                netMaskBitCount[currentBitIndex] = currentBitCount;
+                break;
+            }
+            
+            totalCount++;
+            currentBitCount++;
+            
+            if (currentBitCount == 8) {
+                netMaskBitCount[currentBitIndex] = currentBitCount;
+                currentBitCount = 0;
+                currentBitIndex++;
+            }
+        }
+        
+        for (int bit : netMaskBitCount) {
+            if (bit != 8) {
+                remainingNetMaskBit += 8 - bit;
+            }
+        }
+        netMaskHostCapacity = (int) Math.pow(2, remainingNetMaskBit);
+        
+        System.out.println("[" + netMaskBitCount[0] + ", " + netMaskBitCount[1] + ", " + netMaskBitCount[2] + ", " + netMaskBitCount[3] + "]");
+    }
+    
+    private void getSubnetMask(){
+        int[] values = {0, 0, 0, 0};
+        
+        for (int i = 0; i < netMaskBitCount.length; i++) {
+            switch (netMaskBitCount[i]) {
+                case 8:
+                    values[i] = 255;
+                    break;
+                    
+                case 0:
+                    System.out.println("subnet octect " + (i + 1) + " is 0");
+                    break;
+                    
+                default:
+                    for (int j = 0; j < netMaskBitCount[i]; j++) {
+                        values[i] += bitValues[j];
+                    }
+                    break;
+            }
+        }
+        subnetMask = values[0] + "." + values[1] + "." + values[2] + "." + values[3];
+        System.out.println("Subnet Mask: " + subnetMask);
+        
+        if (!calculatingVlsm) {
+            line = "Bits: " + Arrays.toString(netMaskBitCount) + "\n"
+                    + "remaining: " + remainingNetMaskBit + "\n"
+                    + "Subnet Mask: " + subnetMask + "\n"
+                    + "Hosts: " + netMaskHostCapacity + " - 2 = " + (netMaskHostCapacity - 2) + " usable hosts\n";
+            append();
+        }
+        
+    }
+    
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -376,14 +623,47 @@ public class Subnetting extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField netmaskField;
+    private javax.swing.JTextField nonField;
     private javax.swing.JTextField octect1;
     private javax.swing.JTextField octect2;
     private javax.swing.JTextField octect3;
     private javax.swing.JTextField octect4;
+    private javax.swing.JTextField requiredHosts;
     private javax.swing.JTextField vlsmHosts;
     private javax.swing.JPanel vlsmPanel;
     // End of variables declaration//GEN-END:variables
+}
+
+class vlsm{
+    private String network;
+    private int requiredHosts;
+    private int netMaskHosts;
+    private int netMask;
+
+    public String getNetwork() {
+        return network;
+    }
+
+    public int getRequiredHosts() {
+        return requiredHosts;
+    }
+
+    public int getNetMaskHosts() {
+        return netMaskHosts;
+    }
+
+    public int getNetMask() {
+        return netMask;
+    }
+    
+    public vlsm(String network, int requiredHosts, int netMaskHosts, int netMask) {
+        this.network = network;
+        this.requiredHosts = requiredHosts;
+        this.netMaskHosts = netMaskHosts;
+        this.netMask = netMask;
+    }
+    
+    
+    
 }
