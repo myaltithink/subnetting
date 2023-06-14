@@ -99,6 +99,8 @@ window.addEventListener("load", () => {
         const netmask = document.getElementById("netmask");
         const non = document.getElementById("networks");
         const host = document.getElementById("hosts");
+        
+        calculatingVlsm = false;
 
         const missingip = checkIPInput(octets);
 
@@ -142,10 +144,12 @@ function getNetworkMinMax(hostIteration, sub) {
     networks--;
 
     answer = answer + `1st: ${displayIp()}\n`;
+    let incrementCounter = 0;
     for (let j = 0; j < networks - 2; j++) {
         incrementIp();
+        incrementCounter++;
     }
-    networks -= ip[3];
+    networks -= incrementCounter;
 
     answer = answer + `last: ${displayIp()}\n`;
 
