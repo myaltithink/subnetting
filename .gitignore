@@ -1,1 +1,5 @@
 node_modules
+/java/subnetting-ant/nbproject/private/
+/java/Subnetting-2/nbproject/private/
+/java/Subnetting-2/build/
+/java/Subnetting-2/dist/
