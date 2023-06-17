@@ -6,3 +6,5 @@ This can also provide the Subnet Mask to be used based on the acquired/given net
 Additionally, this can also provide a list of min and max ip address for the given number of networks on the system
 
 - Implemented Variable Length Subnet Mask (VLSM) calculator
+
+Used launch4j to create an executable (.exe) from Executable Jar (.jar) of the java project
